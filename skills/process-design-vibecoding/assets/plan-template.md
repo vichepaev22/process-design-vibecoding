@@ -15,6 +15,10 @@ Canonical specification: record its exact path or document identity.
 
 ## Verification commands
 
+Record affected technologies and installed/targeted versions, Context7 library
+IDs and checked API topics, compatibility findings, and any unavailable lookup
+or explicitly identified official-source fallback before dependent implementation.
+
 ## Progress and remaining work
 
 ## Current-task change receipt

@@ -1,4 +1,4 @@
-# Release specification — Process Design Vibecoding 1.1.0
+# Release specification — Process Design Vibecoding 1.2.0
 
 This file is the canonical specification for this skill release. Auxiliary
 installation and submission guides do not replace it.
@@ -27,6 +27,15 @@ shareable distribution and a portable plugin for ChatGPT and Codex.
 - REL-006 / external dependency: public directory publication requires a
   verified developer identity and OpenAI review. Package preparation and GitHub
   publication do not establish directory listing or actual ChatGPT execution.
+- REL-007 / accepted: before software implementation, identify relevant
+  technologies and installed or explicitly targeted versions, obtain current
+  documentation through Context7, check API compatibility with those versions,
+  and use documented methods/examples. For a bug that may involve a technology's
+  API, check its official documentation through Context7 before choosing the
+  fix. If documentation or the Context7 tool is unavailable, state the precise
+  limitation; never invent an API or claim a lookup occurred. An explicitly
+  disclosed official-source fallback may resolve the contract; unresolved API
+  work stays pending while independent authorized work continues.
 
 ## Acceptance criteria
 
@@ -42,6 +51,12 @@ shareable distribution and a portable plugin for ChatGPT and Codex.
 - AC-005: local installation matches the reviewed package; Astra remains paused.
 - AC-006: documentation distinguishes package checks from ChatGPT execution and
   public directory approval; no automatic listing or universal plan access claim.
+- AC-007: the main workflow, reduced workflow, implementation gate, project-rule
+  template and quality gates enforce REL-007. Supporting guidance explains
+  resolve-library-id then query-docs, version-specific selection, focused
+  queries, evidence, API-related bug fixes and unavailable-documentation handling.
+  The new reference is included in plugin and standalone skill archives. Package
+  and installed skill versions both identify 1.2.0.
 
 ## Assumptions and open questions
 
@@ -49,3 +64,6 @@ Public GitHub publication is explicitly authorized. The package is instruction
 based and requires no hosted MCP service or authentication. Access to workspace
 uploads and public-directory submission depends on the recipient's account and
 workspace. Catalog submission is not part of a confirmed published result.
+Context7 is supplied by the host environment and is not bundled or configured
+by this instruction-based plugin. This release changes workflow instructions;
+it does not establish live Context7 availability or execution.

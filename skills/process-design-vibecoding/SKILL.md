@@ -1,8 +1,8 @@
 ---
 name: process-design-vibecoding
-description: Design and execute substantial AI-assisted software work in Codex or ChatGPT using discovery-first process design, persistent project memory, canonical-spec change control, acceptance criteria, test-first implementation, and verification gates. Use for new apps, meaningful features, refactors, integrations, architecture changes, or ambiguous multi-step coding tasks where reliability matters; skip for trivial one-line edits or simple factual questions unless the user explicitly asks to use this workflow.
+description: Design and execute substantial AI-assisted software work in Codex or ChatGPT using discovery-first process design, persistent project memory, canonical-spec change control, Context7 documentation checks, acceptance criteria, test-first implementation, and verification gates. Use for new apps, meaningful features, refactors, integrations, architecture changes, or ambiguous multi-step coding tasks where reliability matters; skip for trivial one-line edits or simple factual questions unless the user explicitly asks to use this workflow.
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Process-Design Vibecoding
@@ -31,6 +31,7 @@ This skill is deliberately conservative about beginning implementation. Its job 
 8. **Prefer small vertical slices.** Deliver end-to-end increments that can be verified instead of large speculative rewrites.
 9. **Record uncertainty.** If information is missing, mark assumptions and confidence rather than pretending certainty.
 10. **Completion is evidence-based.** “Done” means the agreed criteria pass and the project memory matches the implementation.
+11. **Use current, version-compatible documentation.** Always use Context7 for libraries, frameworks and APIs involved in software implementation; verify documented methods against installed or explicitly targeted versions. Never invent missing APIs.
 
 ## Instruction precedence and repository safety
 
@@ -63,10 +64,11 @@ For a bounded bug fix or small feature, keep the same logic but compress the art
 1. reproduce or define the current behavior;
 2. define expected behavior and acceptance criteria;
 3. identify affected scope;
-4. create or update a regression test when practical;
-5. implement the smallest safe change;
-6. run verification;
-7. update relevant project memory if behavior or contracts changed.
+4. apply the Context7 documentation checkpoint below to affected technologies; for a possibly API-related bug, check the technology's official documentation through Context7 before choosing a fix;
+5. create or update a regression test when practical;
+6. implement the smallest safe change;
+7. run verification;
+8. update relevant project memory if behavior or contracts changed.
 
 ### Skip the workflow
 
@@ -90,6 +92,7 @@ When running the full workflow, read these supporting files from this skill as n
 - `references/testing-strategy.md` — test-first strategy, legacy handling, and exceptions.
 - `references/quality-gates.md` — Definition of Ready, implementation gate, verification gate, Definition of Done.
 - `references/evaluation-scenarios.md` — self-check scenarios for validating that this skill is being followed correctly.
+- `references/context7-documentation.md` — version-aware documentation lookup, API-related debugging and unavailable-documentation handling.
 
 Use the templates in `assets/` when the repository does not already contain equivalent artifacts.
 
@@ -103,6 +106,7 @@ Identify, when available:
 - applicable `AGENTS.md` or equivalent instruction files;
 - README and architecture documentation;
 - package/build system;
+- technologies and their actual installed/resolved versions, from manifests, lockfiles and relevant runtime or API-version configuration; distinguish those from an explicitly proposed target version;
 - test framework and existing test commands;
 - source layout and naming conventions;
 - existing specs, plans, ADRs, issue references, schemas, API contracts, migrations, CI, and lint/typecheck commands;
@@ -266,6 +270,7 @@ The rule file should tell future agents to:
 6. keep docs/tests synchronized with intentional behavior changes;
 7. reconcile every material request from the current task with its recorded status before completion;
 8. run the repository’s verification commands before declaring completion.
+9. use Context7 before library/framework/API implementation, confirm version compatibility, and consult official documentation for possibly API-related bugs; disclose missing documentation and never guess APIs.
 
 Do not put task-specific transient details into global agent rules.
 
@@ -331,6 +336,20 @@ In those cases, define an explicit verification plan before coding, document why
 
 Never pretend TDD was followed if it was not.
 
+## Phase 7.1 — Current documentation with Context7
+
+Before implementing a software slice:
+
+1. Identify the libraries, frameworks and APIs used by the slice and their installed or explicitly targeted versions. Inspect manifests, lockfiles and relevant runtime/API configuration; do not silently assume the newest release.
+2. Obtain current documentation through Context7. Start with `resolve-library-id` using the technology name and lookup goal, unless the user supplied an exact library ID. Select an official, relevant match and a version-specific ID when available, then use `query-docs` for each focused concept.
+3. Verify that the required methods, parameters, imports and API behavior are compatible with the project's version. Documentation for a newer release does not authorize a dependency upgrade. Resolve version or contract uncertainty before dependent implementation.
+4. Use documented methods and examples, adapting them to the existing project. Record the technology/version, Context7 library ID, checked topic and important compatibility findings in the existing plan or decision record. Reuse a still-applicable lookup for the same version and API within the task; query again when that basis changes.
+5. If Context7 or the required documentation is unavailable, report the precise limitation and do not invent an API or claim a lookup occurred. Check official version-matched documentation through another available tool and label that fallback explicitly. If the contract is still unverified, defer the dependent API implementation and continue independent authorized work.
+
+For a bug that may be caused by a library, framework or API contract, consult its official documentation through Context7 before selecting the fix. Check signatures, lifecycle, deprecations and version-specific behavior against the installed version, then verify the fix with the relevant regression scenario.
+
+This checkpoint applies to the reduced workflow too. Scope queries to affected technologies and API concepts rather than every dependency in the repository. It does not require installing or configuring Context7, changing credentials or adding a server to this plugin. Read `references/context7-documentation.md` when handling lookup details or failures.
+
 ## Gate B — Implementation gate
 
 Implementation may begin when:
@@ -339,6 +358,7 @@ Implementation may begin when:
 - the relevant part of the spec is clear;
 - acceptance scenarios exist;
 - test/verification strategy is defined;
+- affected technology versions and API compatibility have been checked using the Context7 checkpoint; any fallback or unresolved dependency is explicit, and no slice relies on a guessed API;
 - risks and dependencies are understood enough to proceed;
 - the planned slice is small enough to verify independently.
 
@@ -419,6 +439,7 @@ A meaningful task is done only when, as applicable:
 - build/typecheck/lint pass where relevant;
 - security/permission/error paths are handled where relevant;
 - project documentation matches intentional behavior;
+- version-compatible documentation findings and any Context7 limitations are recorded for affected library/framework/API work;
 - every material current-task request is reconciled with its canonical requirement or explicit proposal/deferral/rejection record, and delivery status is supported by evidence;
 - the plan reflects completion;
 - significant decisions are recorded;
@@ -438,6 +459,7 @@ Include:
 5. **Remaining risks or next steps:** only real unresolved items.
 
 Do not bury failed verification or assumptions.
+For affected technology APIs, include the checked version and any missing Context7/documentation check without claiming unperformed tool calls.
 
 ## Tracks for common task types
 
@@ -460,6 +482,7 @@ Use this loop:
 `Reproduce -> Expected behavior -> Regression test -> RED -> Fix -> GREEN -> Adjacent regression checks -> Document behavioral change if needed`
 
 If the existing behavior is undocumented, the regression test becomes a durable record of the intended behavior.
+If an API mismatch may explain the bug, use the Context7 checkpoint to check official documentation for the installed version before deciding on the fix.
 
 ### D. Refactor
 
@@ -565,6 +588,7 @@ Before declaring the work complete, ask internally:
 - Are acceptance criteria observable and testable?
 - Did I establish meaningful verification before or during implementation?
 - Did I preserve valid tests rather than weaken them?
+- Did I identify affected technology versions, obtain documentation through Context7 or disclose its unavailability, and verify API compatibility without inventing methods?
 - Did I capture every material current-task request and update accepted requirements in the canonical specification before implementation?
 - Did I run the checks I claim to have run?
 - Is the final report clear about evidence, assumptions, and residual risk?

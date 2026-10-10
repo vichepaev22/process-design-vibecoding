@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "process-design-vibecoding",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Turn project requests into a maintained specification, acceptance criteria and verified delivery.",
   "author": {
     "name": "vichepaev22",
@@ -16,7 +16,7 @@
       "interface": {
         "displayName": "Process Design Vibecoding",
         "shortDescription": "Specs, changes, delivery",
-        "longDescription": "A reusable software project workflow for Codex and ChatGPT. Capture material requests, update the canonical specification before implementation, track proposals and deferred changes, and reconcile requirements with actual verification evidence. Scales down for bounded fixes and preserves existing project conventions.",
+        "longDescription": "A reusable software project workflow for Codex and ChatGPT. Capture material requests, update the canonical specification before implementation, track proposals and deferred changes, and reconcile requirements with verification evidence. Use host-provided Context7 to check version-compatible library, framework and API documentation; disclose unavailable documentation. Scales down for bounded fixes and preserves existing conventions.",
         "developerName": "vichepaev22",
         "category": "Developer Tools",
         "capabilities": [],

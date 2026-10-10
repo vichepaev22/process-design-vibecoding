@@ -1,4 +1,29 @@
-# Release verification — 1.1.0
+# Release verification — 1.2.0
+
+Checks performed on 2026-10-11 for the Context7 instruction update:
+
+- Four existing offline helper regressions passed on Python 3.12; helper behavior
+  was preserved. No new tests were added for this documentation-only policy.
+- The updated skill passed `quick_validate.py`. The 1.2.0 portable manifest passed
+  the official JSON schema and the existing OpenAI metadata/asset checks.
+- Three instruction scenarios were manually inspected: implementation with an
+  installed version, a possibly API-related bug, and unavailable Context7/docs.
+  Their outcomes require version-compatible lookup, official API documentation
+  before the fix, and honest limits with no guessed API, respectively.
+- The installed skill matches all 16 reviewed source files. Version 1.1.0 was
+  saved as a rollback copy, and global instructions were preserved.
+- The release allowlist includes `references/context7-documentation.md` in both
+  package types. Archive integrity and privacy checks are performed on the
+  versioned ZIPs before upload; published assets are downloaded and compared.
+
+REL-007 / AC-007 is implemented across the workflow, reduced path, project
+template, delivery-plan template, quality gates and supporting reference.
+
+Context7 MCP tools were not exposed in the editing session. No live resolve or
+documentation query was performed; this is instruction and package verification,
+not a Context7 connection test or an LLM compliance benchmark.
+
+## Previous release — 1.1.0
 
 Checks performed on 2026-10-10 before GitHub publication.
 

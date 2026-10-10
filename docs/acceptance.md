@@ -15,6 +15,13 @@ file hashes, and inspect public GitHub repository/release metadata.
 AC-006: installation instructions explicitly distinguish a GitHub package from
 an approved listing, and do not claim ChatGPT runtime tests were performed.
 
+AC-007: inspect three instruction scenarios: a new slice using an installed
+library version, a possibly API-related bug, and unavailable Context7/docs.
+The required outcomes are version-aware lookup, official API verification,
+and an honest limitation with no guessed contract. Verify the new reference
+is present in both ZIPs and every installed skill file matches the source.
+This is instruction/package inspection, not an LLM compliance benchmark.
+
 ## Coverage and limitations
 
 Four focused automated tests, not an agent-quality benchmark. The helpers cannot

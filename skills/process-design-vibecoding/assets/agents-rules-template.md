@@ -7,6 +7,12 @@
 - Preserve user changes, accepted decisions and project conventions.
 - Prefer process-design-vibecoding for substantial software changes.
 - Use the reduced workflow for bounded fixes; handle trivial edits directly.
+- Before software implementation, identify affected technologies and versions,
+  obtain current documentation through Context7, verify API compatibility and
+  use documented methods/examples. For possibly API-related bugs, check the
+  technology's official documentation through Context7 before choosing the fix.
+  Disclose unavailable tools/docs; label any official-source fallback and never
+  invent an API or claim an unperformed lookup.
 - Ask only about uncertainty that materially changes behavior, risk or scope.
 - Record the exact canonical-spec path in the project map below. Feature plans do not replace it.
 - Capture material proposals and deferred work; update accepted requirements in the canonical spec before code.

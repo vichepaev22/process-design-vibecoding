@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 — 2026-10-11
+
+- Require Context7 documentation lookup before library/framework/API implementation.
+- Identify installed or targeted versions and verify version-compatible APIs.
+- Check official documentation through Context7 for possibly API-related bugs.
+- Disclose missing tools/docs and official-source fallbacks; never invent APIs.
+- Carry the checkpoint into the reduced workflow, project template and gates.
+- Package the new documentation reference in plugin and standalone releases.
+
 ## 1.1.0 — 2026-10-10
 
 - Require an identified canonical specification; auxiliary plans cannot replace it.
