@@ -1,0 +1,37 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "process-design-vibecoding",
+  "version": "1.1.0",
+  "description": "Turn project requests into a maintained specification, acceptance criteria and verified delivery.",
+  "author": {
+    "name": "vichepaev22",
+    "url": "https://github.com/vichepaev22"
+  },
+  "homepage": "https://github.com/vichepaev22/process-design-vibecoding",
+  "repository": "https://github.com/vichepaev22/process-design-vibecoding",
+  "license": "MIT",
+  "keywords": ["vibecoding", "requirements", "specification", "project-workflow"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Process Design Vibecoding",
+        "shortDescription": "Specs, changes, delivery",
+        "longDescription": "A reusable software project workflow for Codex and ChatGPT. Capture material requests, update the canonical specification before implementation, track proposals and deferred changes, and reconcile requirements with actual verification evidence. Scales down for bounded fixes and preserves existing project conventions.",
+        "developerName": "vichepaev22",
+        "category": "Developer Tools",
+        "capabilities": [],
+        "websiteURL": "https://github.com/vichepaev22/process-design-vibecoding",
+        "supportURL": "https://github.com/vichepaev22/process-design-vibecoding/issues",
+        "privacyPolicyURL": "https://github.com/vichepaev22/process-design-vibecoding/blob/main/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/vichepaev22/process-design-vibecoding/blob/main/TERMS.md",
+        "defaultPrompt": [
+          "Use Process Design Vibecoding to turn my project idea into a specification and acceptance criteria.",
+          "Примени Process Design Vibecoding: внеси мои новые требования в основное ТЗ и обнови приёмку и план."
+        ],
+        "brandColor": "#155E75",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/icon.svg"
+      }
+    }
+  }
+}

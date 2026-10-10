@@ -1,0 +1,14 @@
+{
+  "name": "process-design-vibecoding-marketplace",
+  "interface": {
+    "displayName": "Process Design Vibecoding"
+  },
+  "plugins": [
+    {
+      "name": "process-design-vibecoding",
+      "source": {"source": "local", "path": "./"},
+      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+      "category": "Developer Tools"
+    }
+  ]
+}
