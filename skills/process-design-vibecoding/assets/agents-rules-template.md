@@ -14,6 +14,10 @@
   Disclose unavailable tools/docs; label any official-source fallback and never
   invent an API or claim an unperformed lookup.
 - Ask only about uncertainty that materially changes behavior, risk or scope.
+- During specification, use the current model to assess whether one scenario
+  diagram would clarify actions, integration calls or branches. Offer it when
+  useful; generation is optional, and pending offers or declines do not block
+  delivery. Keep any accepted diagram aligned with its canonical requirements.
 - Record the exact canonical-spec path in the project map below. Feature plans do not replace it.
 - Capture material proposals and deferred work; update accepted requirements in the canonical spec before code.
 - Keep intentional requirement changes, acceptance criteria, plan and tests synchronized.

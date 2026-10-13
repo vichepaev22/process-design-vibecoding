@@ -1,4 +1,4 @@
-# Release specification — Process Design Vibecoding 1.2.0
+# Release specification — Process Design Vibecoding 1.3.0
 
 This file is the canonical specification for this skill release. Auxiliary
 installation and submission guides do not replace it.
@@ -36,6 +36,18 @@ shareable distribution and a portable plugin for ChatGPT and Codex.
   limitation; never invent an API or claim a lookup occurred. An explicitly
   disclosed official-source fallback may resolve the contract; unresolved API
   work stays pending while independent authorized work continues.
+- REL-008 / accepted: offer lightweight project-logic visualization as an
+  optional aid after requirements are understood or a material change affects
+  a scenario. The current primary model assesses whether a diagram clarifies
+  ordering, cross-system calls, branching or results; no additional model call
+  or router is required. Recommend a concrete scenario and diagram type once,
+  respect a decline, and continue independent work while an optional answer is
+  pending. When requested, prefer a sequence diagram from the user's action
+  through the system and named integrations to the visible result, including
+  relevant failure behavior. Link it to the canonical requirements/acceptance,
+  label planned versus verified behavior, and update accepted diagrams with the
+  corresponding requirements. Diagrams never replace the canonical spec or
+  become an additional implementation gate by default.
 
 ## Acceptance criteria
 
@@ -56,7 +68,15 @@ shareable distribution and a portable plugin for ChatGPT and Codex.
   resolve-library-id then query-docs, version-specific selection, focused
   queries, evidence, API-related bug fixes and unavailable-documentation handling.
   The new reference is included in plugin and standalone skill archives. Package
-  and installed skill versions both identify 1.2.0.
+  and installed skill versions identify the current release.
+- AC-008: inspect three bounded scenarios: a simple local change that needs no
+  offer, an integration scenario where a sequence diagram is useful, and an
+  explicit request or later requirement change. The optional offer must not
+  block delivery, invoke a second model automatically, repeat after refusal,
+  invent integrations, or imply that a planned flow has been verified. Validate
+  and render one generic sequence example containing both a successful result
+  and an integration failure. Include the reference in both packages; the
+  source and installed skill must match version 1.3.0.
 
 ## Assumptions and open questions
 

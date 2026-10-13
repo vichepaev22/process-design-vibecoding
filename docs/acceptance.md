@@ -22,6 +22,15 @@ and an honest limitation with no guessed contract. Verify the new reference
 is present in both ZIPs and every installed skill file matches the source.
 This is instruction/package inspection, not an LLM compliance benchmark.
 
+AC-008: manually walk through the simple-change, useful-integration and
+explicit-request/change scenarios. Check that the current model makes a short
+usefulness assessment, any offer is optional, a decline is remembered, and the
+diagram remains tied to current requirements. Parse and render the generic
+sequence example; inspect its action, integration call, successful response,
+failure branch and visible user result. Rendering proves syntax/display, not
+the integration's behavior or future agent compliance. Check package inclusion
+and source/installed version/hash equality.
+
 ## Coverage and limitations
 
 Four focused automated tests, not an agent-quality benchmark. The helpers cannot

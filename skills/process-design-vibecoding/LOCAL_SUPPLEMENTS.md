@@ -7,3 +7,7 @@ Version 1.1.0 adds canonical-spec change capture, request reconciliation, config
 Helper scripts create or check documents only. Structural and traceability checks do not establish semantic completeness, executed verification, or product readiness.
 
 Version 1.2.0 adds the user-requested Context7 documentation checkpoint, installed-version compatibility checks, API-related debugging guidance and explicit unavailable-documentation handling. Context7 is supplied by the host, not bundled in this package.
+
+Version 1.3.0 adds optional scenario visualization, assessed by the current model,
+with a focused Mermaid sequence example. Diagrams supplement requirements;
+neither a renderer nor an additional model/router is required by this package.

@@ -1,4 +1,33 @@
-# Release verification — 1.2.0
+# Release verification — 1.3.0
+
+Checks performed on 2026-10-13 for optional project-logic visualization:
+
+- Four unchanged offline helper regressions passed on Python 3.12. Skill
+  frontmatter and the existing portable manifest/OpenAI metadata checks passed.
+- Three instruction scenarios were manually reviewed: a simple local change,
+  a useful integration sequence, and an explicit request/decline/material change.
+  The written outcomes keep the assessment with the current model, make
+  generation optional, respect declines and preserve canonical-spec authority.
+  This is instruction review, not a model-compliance benchmark.
+- Context7 supplied official Mermaid sequence and public API documentation,
+  including the v11.0.0 syntax reference. The generic example was parsed and
+  rendered using Mermaid 11.0.0 in headless Edge; the user action, integration
+  request, successful result and failure result labels were present, with no
+  page errors. The rendered image was inspected for readable labels and arrows.
+  Package integrity was verified against the official npm registry metadata.
+- The installed skill matches all 17 source files; the preceding 1.2.0 files
+  were saved for rollback, and global instructions were preserved.
+- The release allowlist includes the new visualization reference in both
+  package types. ZIP contents/privacy, GitHub state and downloaded asset hashes
+  are checked separately before a final publication claim.
+
+REL-008 / AC-008 is implemented in the specification phase, change control,
+project-rule/spec templates, evaluation scenarios and focused reference.
+Rendering validates syntax/display, not a real integration or system behavior.
+No model routing or delegated agents were used. OpenAI listing and ChatGPT
+runtime validation remain separate checks.
+
+## Previous release — 1.2.0
 
 Checks performed on 2026-10-11 for the Context7 instruction update:
 

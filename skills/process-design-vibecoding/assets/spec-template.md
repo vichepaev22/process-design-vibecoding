@@ -10,6 +10,10 @@ This is the canonical specification for this project. Supporting documents refin
 
 ## Actors and journeys
 
+Optional diagrams: if useful and requested, link one scenario view to the
+requirements/acceptance below and label proposed, planned or verified scope.
+Skip diagrams that do not clarify the scenario; they are not a readiness gate.
+
 ## Requirements and domain rules
 
 ## Data and integrations

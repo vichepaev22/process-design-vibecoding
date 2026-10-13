@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.0 — 2026-10-13
+
+- Assess optional scenario diagrams with the current primary model.
+- Offer a sequence diagram when actions, calls, branches or results need clarity.
+- Respect declined or pending offers without blocking the main workflow.
+- Link diagrams to canonical requirements and label planned/verified scope.
+- Keep accepted diagrams synchronized with requirement changes.
+- Include a compact Mermaid sequence example and renderer-independent fallback.
+- Preserve existing model selection and avoid automatic routing/delegation.
+
 ## 1.2.0 — 2026-10-11
 
 - Require Context7 documentation lookup before library/framework/API implementation.

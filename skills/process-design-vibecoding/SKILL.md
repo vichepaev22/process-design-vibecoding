@@ -2,7 +2,7 @@
 name: process-design-vibecoding
 description: Design and execute substantial AI-assisted software work in Codex or ChatGPT using discovery-first process design, persistent project memory, canonical-spec change control, Context7 documentation checks, acceptance criteria, test-first implementation, and verification gates. Use for new apps, meaningful features, refactors, integrations, architecture changes, or ambiguous multi-step coding tasks where reliability matters; skip for trivial one-line edits or simple factual questions unless the user explicitly asks to use this workflow.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Process-Design Vibecoding
@@ -32,6 +32,7 @@ This skill is deliberately conservative about beginning implementation. Its job 
 9. **Record uncertainty.** If information is missing, mark assumptions and confidence rather than pretending certainty.
 10. **Completion is evidence-based.** “Done” means the agreed criteria pass and the project memory matches the implementation.
 11. **Use current, version-compatible documentation.** Always use Context7 for libraries, frameworks and APIs involved in software implementation; verify documented methods against installed or explicitly targeted versions. Never invent missing APIs.
+12. **Visualize when it clarifies a decision.** Assess useful diagrams with the current model, offer a focused view, and keep generation optional. Diagrams support the specification; they do not add a default delivery gate.
 
 ## Instruction precedence and repository safety
 
@@ -93,6 +94,7 @@ When running the full workflow, read these supporting files from this skill as n
 - `references/quality-gates.md` — Definition of Ready, implementation gate, verification gate, Definition of Done.
 - `references/evaluation-scenarios.md` — self-check scenarios for validating that this skill is being followed correctly.
 - `references/context7-documentation.md` — version-aware documentation lookup, API-related debugging and unavailable-documentation handling.
+- `references/project-visualization.md` — optional diagram selection, sequence examples and verification; read when a diagram is requested or selected.
 
 Use the templates in `assets/` when the repository does not already contain equivalent artifacts.
 
@@ -199,6 +201,34 @@ The spec should include only material relevant to the project, but for substanti
 Keep the current requirements authoritative: update the affected active section when a rule changes, and retain superseded rules only as clearly marked history. Give material requirements stable identifiers when useful for linking changes to acceptance and delivery.
 
 Requirements should be testable. Prefer language such as “must,” “must not,” “when X, then Y,” and named scenarios over vague adjectives.
+
+### Phase 3.1 — Optional project-logic visualization
+
+Once the relevant requirements are understood, briefly assess whether a diagram
+would clarify the order of actions, integration calls, asynchronous work,
+branches or a state lifecycle. Use the current primary model and context; this
+small assessment does not require a separate model, routing or delegated work.
+For a simple local change with no meaningful sequence or ambiguity, skip it.
+
+When useful, offer one concrete scenario and diagram type, explaining its value
+in a sentence. Prefer a **sequence diagram** for the path from a user's click
+through the interface, system and integrations to the visible result. Use a
+flowchart for decisions or a state diagram when the lifecycle is the question.
+Do not produce a collection of diagrams by default.
+
+If the user already requests a diagram, create it without asking again. Otherwise,
+use the available user-input mechanism for the optional offer and continue
+independent authorized work while awaiting an answer. A pending offer or a
+decline must not block specification, implementation or delivery. Respect a
+decline for this scenario; re-offer only when the user asks or the scenario
+materially changes. Preserve an established project preference.
+
+For selected diagrams, read `references/project-visualization.md`. Link the view
+to the canonical requirements/acceptance and label planned versus verified
+scope. Show the trigger, relevant participants/calls, result and material failure
+path without inventing contracts. Prefer one compact Mermaid diagram with a
+plain-language explanation. Its existence or rendering does not prove the
+system works and is not a new default implementation gate.
 
 ## Gate A — Definition of Ready
 
@@ -389,7 +419,7 @@ Run this checkpoint whenever the user introduces a material proposal, changes a 
 2. Treat an explicit instruction to make a change as authorization within its stated scope; do not restart approval without a material unresolved choice. Record exploratory ideas as proposed and postponed work as deferred rather than silently implementing or dropping them.
 3. For accepted changes, identify the old and new behavior and assess only relevant impact: data, contracts, permissions, migrations, checks, documentation, and scope.
 4. **Update the canonical specification first**, including the affected current requirement. Supporting plans and feature documents may add detail but cannot substitute for this update. Preserve compatible decisions and clearly mark superseded history.
-5. Update the linked acceptance scenarios, relevant verification plan, and delivery plan. Then implement the accepted slice.
+5. Update the linked acceptance scenarios, relevant verification plan, and delivery plan. Update any accepted diagram of the affected scenario too, or mark it outdated until reconciled. Then implement the accepted slice.
 6. Before completion, reconcile every material request in the current task: identify its canonical-spec location or its proposed/deferred/rejected record, delivery state, and actual verification evidence. A passing test suite does not waive this reconciliation.
 
 Use the existing project format. `assets/change-ledger-template.json` and `scripts/validate_project_memory.py --changes ... --require-change ...` provide an optional traceability check; they do not assess semantic coverage or prove that checks ran. Do not create a second tracking system when the project already has an equivalent.
