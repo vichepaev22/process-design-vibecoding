@@ -14,6 +14,14 @@ Optional diagrams: if useful and requested, link one scenario view to the
 requirements/acceptance below and label proposed, planned or verified scope.
 Skip diagrams that do not clarify the scenario; they are not a readiness gate.
 
+## Prototype and user feedback
+
+For a new product, or a material journey change while prototype maintenance is in scope, record a short draft, interactive preview, checks and user feedback. Resolve feedback before substantial implementation and reuse accepted choices. With a recorded product_only decision, review and verify changes in the real product instead. Record inapplicability for purely internal work.
+
+## Prototype maintenance after live-product handoff
+
+Record the one-time question as pending or the user's existing answer: `prototype_mode: sync | product_only`, decision source/date. In product_only mode the prototype is frozen; later changes and checks target the real product. Do not ask again or update the mock without an explicit request.
+
 ## Requirements and domain rules
 
 ## Data and integrations

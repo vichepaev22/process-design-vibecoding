@@ -6,6 +6,12 @@ Canonical specification: record its exact path or document identity.
 
 ## Objective and scope
 
+## Prototype review before implementation
+
+Record the initial interactive prototype, checks, feedback and accepted choices. Review material UX changes in the prototype only while maintenance is in scope; in product_only mode target the actual product. Reuse existing acceptance or record inapplicability without duplicate approval.
+
+At the first release/actual-product testing, record the one-time prototype-maintenance choice (`sync` or `product_only`) or reuse the user's existing instruction. Mark an unanswered question pending without repeating it. Product-only delivery excludes prototype maintenance and prototype verification tasks.
+
 ## Vertical slices
 
 | Slice | Observable outcome | Scope/components | Dependencies | Acceptance | Verification | Status |

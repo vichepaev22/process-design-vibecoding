@@ -15,6 +15,7 @@ SKILL_FILES = (
     "references/quality-gates.md", "references/evaluation-scenarios.md",
     "references/context7-documentation.md",
     "references/project-visualization.md",
+    "references/prototype-first.md",
     "assets/spec-template.md", "assets/plan-template.md",
     "assets/acceptance-criteria-template.md", "assets/agents-rules-template.md",
     "assets/change-ledger-template.json",

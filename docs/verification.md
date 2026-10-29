@@ -1,4 +1,22 @@
-# Release verification — 1.3.0
+# Release verification — 1.5.0
+
+Checks on 2026-10-29: the installed 1.4.0 prototype rules were preserved and
+the approved release-handoff choice was added. Reviewed seven instruction
+scenarios in evaluation-scenarios.md: new product, first handoff, prior explicit
+answer, pending answer, product_only UX change, sync, and scoped reopening.
+The initial prototype remains mandatory; product_only excludes mock maintenance
+and checks. This is instruction review, not an agent-compliance benchmark.
+
+- Bundled skill-creator quick_validate.py passed on the source skill.
+- Four unchanged project-memory helper regressions passed with Python 3.12.
+- The staged update contains 18 allowlisted files, eight changed from 1.4.0;
+  installation checks the full previous file set and hashes before writing.
+- The build allowlist includes prototype-first.md in both portable packages.
+  Plugin/skill versions are 1.5.0; ZIP contents and SHA256SUMS are checked.
+- Backups, hashes and installation receipt are local maintenance artifacts;
+  the public package contains no private projects or machine configuration.
+
+## Previous release verification — 1.3.0
 
 Checks performed on 2026-10-13 for optional project-logic visualization:
 

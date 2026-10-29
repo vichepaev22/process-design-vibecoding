@@ -11,3 +11,13 @@ Version 1.2.0 adds the user-requested Context7 documentation checkpoint, install
 Version 1.3.0 adds optional scenario visualization, assessed by the current model,
 with a focused Mermaid sequence example. Diagrams supplement requirements;
 neither a renderer nor an additional model/router is required by this package.
+
+Version 1.4.0 adds the user-requested mandatory lightweight interactive prototype
+and user-feedback stage after discovery, before substantial product implementation.
+Accepted prototypes are reused; bounded fixes and internal work retain their
+existing scope. Mock checks remain separate from live integration evidence.
+
+Version 1.5.0 adds a one-time prototype-maintenance choice at the first release
+or actual-product testing. The user's product_only choice freezes the mock;
+subsequent changes and verification target the real product until an explicit
+request reopens prototype work. The initial prototype stage is preserved.

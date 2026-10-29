@@ -1,8 +1,8 @@
 ---
 name: process-design-vibecoding
-description: Design and execute substantial AI-assisted software work in Codex or ChatGPT using discovery-first process design, persistent project memory, canonical-spec change control, Context7 documentation checks, acceptance criteria, test-first implementation, and verification gates. Use for new apps, meaningful features, refactors, integrations, architecture changes, or ambiguous multi-step coding tasks where reliability matters; skip for trivial one-line edits or simple factual questions unless the user explicitly asks to use this workflow.
+description: Design and execute substantial AI-assisted software work using discovery, an initial interactive prototype and user feedback, a one-time prototype-maintenance choice at release handoff, canonical specifications, Context7 documentation checks, acceptance criteria, tests, and verified delivery. Use for new apps, meaningful features, integrations, refactors, or ambiguous multi-step work; scale down for bounded fixes and skip trivial edits or simple factual questions.
 metadata:
-  version: "1.3.0"
+  version: "1.5.0"
 ---
 
 # Process-Design Vibecoding
@@ -13,7 +13,7 @@ Use this skill to turn an ambiguous software request into a controlled, inspecta
 
 The central operating model is:
 
-`CONTEXT -> SPEC -> MEMORY -> CONTRACT -> DELIVERY`
+`CONTEXT -> PROTOTYPE -> USER FEEDBACK -> SPEC -> MEMORY -> CONTRACT -> DELIVERY`
 
 Do not treat coding as the first step. Treat coding as one stage in a project process whose earlier stages reduce ambiguity and whose later stages verify outcomes.
 
@@ -33,6 +33,7 @@ This skill is deliberately conservative about beginning implementation. Its job 
 10. **Completion is evidence-based.** “Done” means the agreed criteria pass and the project memory matches the implementation.
 11. **Use current, version-compatible documentation.** Always use Context7 for libraries, frameworks and APIs involved in software implementation; verify documented methods against installed or explicitly targeted versions. Never invent missing APIs.
 12. **Visualize when it clarifies a decision.** Assess useful diagrams with the current model, offer a focused view, and keep generation optional. Diagrams support the specification; they do not add a default delivery gate.
+13. **Prototype first; choose maintenance once at release.** Show and agree on a small initial interactive prototype after discovery. At the first release/live-product testing handoff, ask once whether to keep the prototype synchronized or work only on the product. Respect the recorded choice under Phase 2.2; do not maintain a frozen mock automatically.
 
 ## Instruction precedence and repository safety
 
@@ -60,7 +61,7 @@ Use the full workflow when one or more are true:
 
 ### Reduced workflow
 
-For a bounded bug fix or small feature, keep the same logic but compress the artifacts:
+For a bounded bug fix or small feature, keep the same logic but compress the artifacts. A material changed journey requires Phase 2.1 while prototype review applies; after a recorded `product_only` choice, follow Phase 2.2 instead. Ordinary fixes to an accepted journey do not require a new prototype:
 
 1. reproduce or define the current behavior;
 2. define expected behavior and acceptance criteria;
@@ -95,6 +96,7 @@ When running the full workflow, read these supporting files from this skill as n
 - `references/evaluation-scenarios.md` — self-check scenarios for validating that this skill is being followed correctly.
 - `references/context7-documentation.md` — version-aware documentation lookup, API-related debugging and unavailable-documentation handling.
 - `references/project-visualization.md` — optional diagram selection, sequence examples and verification; read when a diagram is requested or selected.
+- `references/prototype-first.md` — initial prototype/user-feedback gate and release handoff; read when Phase 2.1 applies or the handoff choice needs resolving, not routinely in recorded `product_only` mode.
 
 Use the templates in `assets/` when the repository does not already contain equivalent artifacts.
 
@@ -175,9 +177,30 @@ Discovery is sufficient when the important behavior can be expressed as clear sc
 
 Do not use a fake numeric confidence score as a substitute for judgment. If a “95% confidence” style instruction is useful conversationally, treat it as shorthand for “no material unresolved ambiguity.”
 
+## Phase 2.1 — Mandatory prototype before substantial implementation
+
+For a new bot, site, application or other user-facing product, create and show a small **interactive MVP prototype immediately after understanding the task**. Do not postpone it until after detailed architecture or production implementation. For material changes to an existing journey, this gate applies only while prototype maintenance remains in scope; a recorded `product_only` choice under Phase 2.2 overrides it. Read `references/prototype-first.md` only when this phase applies.
+
+Record a short draft of the relevant scenario, constraints and assumptions in the canonical spec before writing the mock. A clickable chat with scripted messages and synthetic attachments, or a small page with working transitions, is enough. Show the primary path and a material failure/correction path. A text-only plan, static screenshot or diagram does not replace the interactive prototype.
+
+Show the concrete artifact without asking permission to create or show it. Obtain and incorporate the user's feedback on the relevant product/UX choices before substantial implementation, paid integrations or full visual polishing. Existing explicit acceptance of an unchanged prototype counts; do not ask again. Showing a preview alone is not acceptance. Continue independent inspection and specification work while feedback is pending.
+
+For purely internal backend work with no changed user journey, record why an interactive UI prototype does not apply and use a minimal observable contract example where useful. Bounded fixes and trivial changes retain their reduced/skip workflow; do not invent a new UI or rebuild an already accepted prototype.
+
+## Phase 2.2 — One-time handoff to live-product testing
+
+When a project with an accepted prototype reaches its first release or the user starts testing the actual bot, app, site or other solution, ask **once**: “Should we keep updating the prototype alongside the product, or make further changes only in the working product?” Use the user's language. Do not ask if an existing instruction already answers this choice.
+
+Record `prototype_mode: sync | product_only` and the user's decision in existing project instructions, spec or plan. Record an unanswered handoff question as pending; do not repeat it, treat silence as a choice, or modify the prototype while waiting. Continue independent authorized product work.
+
+- **sync:** update only the affected prototype and product scope; reuse accepted design and avoid rebuilding the mock.
+- **product_only:** freeze the prototype as a historical reference. Implement and test further changes in the actual product. Do not edit, synchronize, rebuild, browser-test, refresh or package the mock, spend tokens on keeping it aligned, or demand a new prototype review for later UX changes. Continue normal product requirements, acceptance and verification work.
+
+Reuse this project-level decision across turns and tasks. Reopen prototype work only on an explicit user request, limited to that request; a one-off mock edit does not silently restore ongoing synchronization. The initial prototype/user-feedback stage for a new product remains required.
+
 ## Phase 3 — Build the specification
 
-Create or update a durable specification. Prefer the project’s existing format. If none exists, use `assets/spec-template.md` as the model and create `docs/spec.md` or another repository-appropriate path.
+Create or update a durable specification, incorporating required prototype feedback. Preserve accepted behavior and, where applicable, record the prototype path, feedback and resulting decisions. Prefer the project’s existing format. If none exists, use `assets/spec-template.md` as the model and create `docs/spec.md` or another repository-appropriate path.
 
 The spec should include only material relevant to the project, but for substantial work it should normally cover:
 
@@ -232,7 +255,7 @@ system works and is not a new default implementation gate.
 
 ## Gate A — Definition of Ready
 
-Before implementation, evaluate the Definition of Ready in `references/quality-gates.md`.
+Before substantial implementation, evaluate the prototype review gate where applicable and the Definition of Ready in `references/quality-gates.md`.
 
 Do not begin substantial implementation while a material blocker remains, such as:
 
@@ -382,7 +405,9 @@ This checkpoint applies to the reduced workflow too. Scope queries to affected t
 
 ## Gate B — Implementation gate
 
-Implementation may begin when:
+Substantial product implementation may begin when:
+
+- the required interactive prototype has been shown and accepted, its inapplicability is recorded under Phase 2.1, or a recorded `product_only` decision under Phase 2.2 applies; the isolated initial prototype is authorized by its small draft scenario and is not blocked by this production-implementation gate;
 
 - accepted changes for this slice are recorded in the canonical specification, not only in a feature plan or chat;
 - the relevant part of the spec is clear;
@@ -497,13 +522,13 @@ For affected technology APIs, include the checked version and any missing Contex
 
 Use the complete lifecycle:
 
-`Frame -> Discover -> Spec -> Ready -> Plan -> Memory -> Acceptance -> Tests -> Implement -> Verify -> Done`
+`Frame -> Discover -> Draft scenario -> Interactive prototype -> User feedback -> Spec -> Ready -> Plan -> Memory -> Acceptance -> Tests -> Implement -> Verify -> Done`
 
 Prioritize MVP boundaries and non-goals to prevent uncontrolled scope growth.
 
 ### B. New feature in an existing codebase
 
-Inspect current behavior and architecture first. Discovery should focus on the delta between current and desired behavior. Prefer updating existing specs/tests rather than creating parallel documentation systems.
+Inspect current behavior and architecture first. Discovery should focus on the delta between current and desired behavior. For a material user-facing change, prototype only the affected journey when Phase 2.1 applies. With a recorded `product_only` choice, work directly in the product and preserve the frozen prototype. Prefer updating existing specs/tests rather than creating parallel documentation systems.
 
 ### C. Bug fix
 
@@ -613,6 +638,7 @@ Before running a bundled script, inspect its contents and use an appropriate wor
 Before declaring the work complete, ask internally:
 
 - Did I understand the desired behavior rather than merely the requested implementation?
+- For a new product or applicable material UX change, did I show the interactive prototype and resolve feedback? At live-product handoff, did I ask once or reuse the existing prototype-maintenance choice, and honor `product_only` without extra mock work?
 - Did I preserve existing repository conventions and instructions?
 - Did I turn material decisions into durable project memory?
 - Are acceptance criteria observable and testable?

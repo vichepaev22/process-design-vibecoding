@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.5.0 — 2026-10-29
+
+- Preserve the initial interactive prototype and user-feedback stage.
+- Ask once at the first release/live-product testing whether to synchronize the prototype or work only in the product.
+- Reuse explicit existing decisions; record pending questions without repeating them or treating silence as approval.
+- Freeze prototype maintenance and checks in product_only mode; reopen only on an explicit scoped request.
+- Include the previously local 1.4.0 prototype rules in the portable GitHub packages.
+
+## 1.4.0 — 2026-10-27 (local update)
+
+- Require a lightweight interactive prototype after discovery, before substantial user-facing implementation.
+- Record user feedback and reuse accepted prototypes; retain reduced scope for bounded fixes and internal work.
+
 ## 1.3.0 — 2026-10-13
 
 - Assess optional scenario diagrams with the current primary model.
